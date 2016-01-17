@@ -1,42 +1,267 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
+<html ng-app="ionicApp">
+	<head>
 
-    http://www.apache.org/licenses/LICENSE-2.0
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
 
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+		<title>Ionic-AngularJS Kitchen Sink</title>
+
+		<link href="http://code.ionicframework.com/1.0.0-beta.1/css/ionic.min.css" rel="stylesheet">
+		<script src="http://code.ionicframework.com/1.0.0-beta.1/js/ionic.bundle.min.js"></script>
+		<!--<link href="http://www.webdoes.com/archives/lib/ionic/css/ionic.beta.min.css" rel="stylesheet">-->
+		<!--<script src="http://www.webdoes.com/archives/lib/ionic/js/ionic.bundle.beta.min.js"></script>-->
+
+		<script src="js/app.js"></script>
+
+<style>
+      .box {height:300px;padding: 10px}
+</style>      
+	</head>
+
+	<body ng-controller="AppCtrl">
+
+		<ion-nav-bar class="nav-title-slide-ios7 bar-positive">
+			<ion-nav-back-button class="button-icon ion-arrow-left-c">
+			</ion-nav-back-button>
+		</ion-nav-bar>
+
+		<ion-nav-view animation="slide-left-right"></ion-nav-view>
+
+		<ion-spinner icon="android"></ion-spinner>
+<script id="menu.html" type="text/ng-template">
+    <ion-side-menus>
+
+      <ion-side-menu side="left">
+        <ion-header-bar class="bar-positive">
+          <h1 class="title">Side Menu</h1>
+        </ion-header-bar>
+        <ion-content>
+          <ul class="list">
+            <a href="http://www.webdoes.com/archives/609.html#/menu/tab/buttons" class="item" menu-toggle="left">问答服务</a>
+            <a href="http://www.webdoes.com/archives/609.html#/menu/keyboard" class="item" menu-toggle="left">Keyboard Input Types</a>
+            <a href="http://www.webdoes.com/archives/609.html#/menu/slidebox" class="item" menu-toggle="left">Slide Box</a>
+            <a href="http://www.webdoes.com/archives/609.html#/menu/about" class="item" menu-toggle="left">About</a>
+          </ul>
+        </ion-content>
+      </ion-side-menu>
+
+      <ion-side-menu-content>        
+        <ion-nav-view name="menuContent"></ion-nav-view>
+      </ion-side-menu-content>
+
+    </ion-side-menus>
+</script>    
+
+<script id="tabs.html" type="text/ng-template">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button class="button-icon ion-arrow-left-c">
+        </ion-nav-back-button>
+
+        <ion-nav-buttons side="left">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+          <button class="button button-icon button-clear ion-compose" ng-click="modal.show()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+        
+    <ion-tabs class="tabs-icon-top tabs-positive">
+
+      <ion-tab title="问答" icon="ion-pricetag" href="http://www.webdoes.com/archives/609.html#/menu/tab/buttons">
+        <ion-nav-view name="buttons-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="日记" icon="ion-clipboard" href="http://www.webdoes.com/archives/609.html#/menu/tab/list">
+        <ion-nav-view name="list-tab"></ion-nav-view>
+      </ion-tab>
+
+      <ion-tab title="健康汇" icon="ion-settings" href="http://www.webdoes.com/archives/609.html#/menu/tab/form">
+        <ion-nav-view name="form-tab"></ion-nav-view>
+      </ion-tab>
+
+    </ion-tabs>
+</script>
+
+<script id="buttons.html" type="text/ng-template">
+    <ion-view title="大咖问答">
+      <ion-content class="padding">
+        <div class="head" style="background-image: url(img/headImg.jpg);background-size: cover;position:relative;height: 120px;">
         </div>
-        <script type="text/javascript" src="js/cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script type="text/javascript">
-            app.initialize();
-        </script>
-    </body>
+        <div class="item item-divider">
+          问答集锦
+        </div>
+
+        <ion-list>
+          <ion-item ng-repeat="testItem in testItems" item="testItem" href="http://www.webdoes.com/archives/609.html#/menu/tab/testItem" data-id="{{testItem.id}}">
+            问题标题： {{ testItem.title }}
+          </ion-item>
+          </ion-list>
+      </ion-content>
+    </ion-view>
+</script>
+
+<script id="item.html" type="text/ng-template">
+    <ion-view title="Item">
+      <ion-content class="padding">
+        <p>内容暂时没提供</p>
+      </ion-content>
+    </ion-view>
+</script>
+
+<script id="testItem.html" type="text/ng-template">
+    <ion-view title="testItem">
+      <ion-content class="padding">
+        <p>内容暂时没提供</p>
+      </ion-content>
+    </ion-view>
+</script>
+
+<script id="list.html" type="text/ng-template">
+    <ion-view title="日记列表">
+      <ion-content>
+        <ion-list show-delete="data.showDelete" on-delete="onItemDelete(item)" option-buttons="itemButtons">
+
+          <div class="list">
+            <!--<div class="item item-divider">-->
+            <ion-item ng-repeat="item in items" item="item" href="http://www.webdoes.com/archives/609.html#/menu/tab/item">
+              Item {{ item.id }}
+            </ion-item>
+          </div>
+
+        </ion-list>
+      </ion-content>
+    </ion-view>
+</script>
+
+<script id="form.html" type="text/ng-template">
+    <ion-view title="健康专栏">
+      <ion-content class="padding">
+        开发中，尽请期待...
+        <br>
+
+      </ion-content>
+    </ion-view>
+</script>
+
+<script id="slidebox.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar class="bar-positive">
+          <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+          <h1 class="title">Slide Box</h1>
+      </ion-header-bar>
+      
+      <ion-content>
+        <ion-slide-box>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #1</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #2</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box">
+                <h2>Box #3</h2>
+                <p>Content goes here</p>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+       </ion-content>    
+    </ion-view>
+</script>   
+
+<script id="keyboard.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+        <h1 class="title">Keyboard Input</h1>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="list">        
+          <label class="item item-divider">
+            Input types for popup keyboard
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Text</span>
+            <input type="text" ng-model="user.username">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Password</span>
+            <input type="password" ng-model="user.password">
+          </label>          
+          <label class="item item-input">
+            <span class="input-label">Email</span>
+            <input type="email">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Tel</span>
+            <input type="tel">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Number</span>
+            <input type="number">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Date</span>
+            <input type="date">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">Month</span>
+            <input type="month">
+          </label> 
+        </div>
+      </ion-content>
+    </ion-view>
+</script>     
+
+<script id="about.html" type="text/ng-template">
+    <ion-view>
+      <ion-header-bar class="bar-positive">
+        <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()"></button>
+        <h1 class="title">About</h1>
+      </ion-header-bar>
+
+      <ion-content class="padding">
+        <div class="card">
+          <div class="item">
+            <h3>本测试demo由徐杰开发设计，仅供参考</h3>
+            <p><a href="http://www.webdoes.com" target="_blank">联系他</a></p>
+          </div>
+        </div>
+      </ion-content>
+    </ion-view>
+</script>    
+
+<script id="modal.html" type="text/ng-template">
+    <div class="modal">
+      <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">咨询</h1>
+        <button class="button button-clear button-primary" ng-click="modal.hide()">取消</button>
+      </ion-header-bar>
+      
+      <ion-content class="padding">
+        <div class="list">
+          <label class="item item-input">
+            <span class="input-label">标题</span>
+            <input type="text">
+          </label>
+          <label class="item item-input">
+            <span class="input-label">内容</span>
+            <textarea rows="4"></textarea>
+          </label>
+        </div>
+        <button class="button icon icon-right ion-arrow-right-c button-balanced button-block">提交</button>
+      </ion-content>
+    </div>
+</script>  
+
+	</body>
 </html>
